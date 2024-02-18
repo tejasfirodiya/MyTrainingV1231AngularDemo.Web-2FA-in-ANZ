@@ -1,0 +1,142 @@
+{
+"propertyTemplates":[
+        {
+            "placeholder" : "{{List_Validation_Properties}}",
+            "templates" : [					
+                {
+                "type" : "string",
+                "content" : "\'#{{Entity_Name_Here}}_{{Property_Name_Here}}\',"
+                },
+                {
+                "type" : "default",
+                "content" : ""
+                }
+            ]
+        },
+        {
+            "placeholder" : "{{Seed_Updated_Value}}",
+            "templates" : [					
+                {
+                "type" : "string",
+                "content" : "\'#{{Entity_Name_Here}}_{{Property_Name_Here}}\' : \'Updated test value\',"
+                },
+                {
+                "type" : "default",
+                "content" : ""
+                }
+            ]
+        }
+    ],
+"conditionalTemplates":[
+        {
+            "placeholder" : "{{Steps_Here}}",
+            "condition": "{{Is_Non_Modal_CRUD_Page}} == false",
+            "content" : "/* Step 2 */
+        test(\'should display modal on click to \"New\" button\', async () => {
+            await page.click(\'#btn_create_{{entity_Name_Here}}\');
+            await {{entity_Name_Plural_Here}}Page.waitForModal(\'createOrEditModal\');
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_NEW_MODAL);
+        });
+
+        /* Step 3 */
+        test(\'should show error when form is saved before required inputs are filled\', async () => {
+            await triggerValidation();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_VALIDATION_SHOW);
+        });
+
+        /* Step 4 */
+        test(\'should hide error when form is properly filled\', async () => {
+            await fillInputsWithValidValues();
+            await {{entity_Name_Plural_Here}}Page.triggerValidation({{List_Validation_Properties}});
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_VALIDATION_HIDE);
+        });
+
+        /* Step 5 */
+        test(\'should save record when \"Save\" button is clicked\', async () => {
+            await {{entity_Name_Plural_Here}}Page.saveForm();
+            await {{entity_Name_Plural_Here}}Page.waitForResponse();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_NEW_SAVE);
+        });
+
+        /* Step 7 */
+        test(\'should display actions on click to \"Actions\" button\', async () => {
+            await {{entity_Name_Plural_Here}}Page.openActionsDropdown(1);
+            await {{entity_Name_Plural_Here}}Page.waitForDropdownMenu();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_ACTIONS);
+        });
+
+        /* Step 8 */
+        test(\'should display modal on click to \"Edit\" button\', async () => {
+            await {{entity_Name_Plural_Here}}Page.triggerDropdownAction(\'Edit\');
+            await {{entity_Name_Plural_Here}}Page.waitForModal(\'createOrEditModal\');
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_EDIT_MODAL);
+        });"
+        },
+        {
+            "placeholder" : "{{Consts_Here}}",
+            "condition": "{{Is_Non_Modal_CRUD_Page}} == false",
+            "content": "const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_NEW_MODAL = \'{{Entity_Name_Plural_Here}}.crud.020-new-modal.png\';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_EDIT_MODAL = \'{{Entity_Name_Plural_Here}}.crud.080-edit-modal.png\';"
+        },
+        {
+            "placeholder" : "{{Steps_Here}}",
+            "condition": "{{Is_Non_Modal_CRUD_Page}} == true",
+            "content" : "/* Step 2 */
+        test(\'should open adding page on click to \"New\" button\', async () => {
+            await page.click(\'#btn_create_{{entity_Name_Here}}\');
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_NEW_PAGE);
+        });
+
+        /* Step 3 */
+        test(\'should show error when form is saved before required inputs are filled\', async () => {
+            await triggerValidation();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_VALIDATION_SHOW);
+        });
+
+        /* Step 4 */
+        test(\'should hide error when form is properly filled\', async () => {
+            await fillInputsWithValidValues();
+            await {{entity_Name_Plural_Here}}Page.triggerValidation({{List_Validation_Properties}});
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_VALIDATION_HIDE);
+        });
+
+        /* Step 5 */
+        test(\'should save record when \"Save\" button is clicked\', async () => {
+            await {{entity_Name_Plural_Here}}Page.saveForm();
+            await {{entity_Name_Plural_Here}}Page.waitForResponse();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_NEW_SAVE);
+        });
+
+        /* Step 7 */
+        test(\'should display actions on click to \"Actions\" button\', async () => {
+            await {{entity_Name_Plural_Here}}Page.openActionsDropdown(1);
+            await {{entity_Name_Plural_Here}}Page.waitForDropdownMenu();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_ACTIONS);
+        });
+
+        /* Step 8 */
+        test(\'should display modal on click to \"Edit\" button\', async () => {
+            await {{entity_Name_Plural_Here}}Page.triggerDropdownAction(\'Edit\');
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_EDIT_PAGE);
+        });"
+        },
+        {
+            "placeholder" : "{{Consts_Here}}",
+            "condition": "{{Is_Non_Modal_CRUD_Page}} == true",
+            "content": "const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_NEW_PAGE = \'{{Entity_Name_Plural_Here}}.crud.020-new-page.png\';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_EDIT_PAGE = \'{{Entity_Name_Plural_Here}}.crud.080-edit-page.png\';"
+        }
+    ]
+}

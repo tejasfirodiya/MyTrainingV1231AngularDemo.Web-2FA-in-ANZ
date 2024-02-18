@@ -1,0 +1,7 @@
+﻿namespace MyTrainingV1231AngularDemo.MultiTenancy.Payments.Dto
+{
+    public class GetActiveGatewaysInput
+    {
+        public bool? RecurringPaymentsEnabled { get; set; }
+    }
+}

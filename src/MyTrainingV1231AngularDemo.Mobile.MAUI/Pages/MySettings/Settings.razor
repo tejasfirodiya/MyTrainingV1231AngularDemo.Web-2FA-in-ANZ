@@ -1,0 +1,17 @@
+﻿@using MyTrainingV1231AngularDemo.Services.Navigation
+@inherits MyTrainingV1231AngularDemoMainLayoutPageComponentBase
+@attribute [Route("/" + NavigationUrlConsts.Settings)]
+
+<div class="card">
+    <div class="card-body">
+        <LanguageSwitch OnSave="OnLanguageSwitchAsync"></LanguageSwitch>
+        <button class="btn btn-primary w-100 mb-5" @onclick="ChangePassword">
+            @L("ChangePassword")
+        </button>
+        <button class="btn btn-danger w-100" @onclick="LogOut">
+            @L("Logout")
+        </button>
+    </div>
+</div>
+
+<ChangePasswordModal OnSave="OnChangePasswordAsync" @ref="changePasswordModal"></ChangePasswordModal>

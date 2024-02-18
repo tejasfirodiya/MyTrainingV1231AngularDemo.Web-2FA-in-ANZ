@@ -1,0 +1,121 @@
+﻿{{Enum_Using_Looped_Template_Here}}
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}.Dtos;
+using Abp.Application.Services.Dto;
+using Microsoft.EntityFrameworkCore;
+using {{Namespace_Here}}.{{Namespace_Relative_Full_Here}};
+using Shouldly;
+using Xunit;
+using Abp.Timing;
+
+namespace {{Namespace_Here}}.Tests.{{Namespace_Relative_Full_Here}}
+{
+    public class {{Entity_Name_Plural_Here}}AppService_Tests : AppTestBase
+    {
+        private readonly I{{Entity_Name_Plural_Here}}AppService _{{entity_Name_Plural_Here}}AppService;
+        
+        private readonly {{Primary_Key_Here}} _{{entity_Name_Here}}TestId;
+
+        public {{Entity_Name_Plural_Here}}AppService_Tests()
+        {
+            _{{entity_Name_Plural_Here}}AppService = Resolve<I{{Entity_Name_Plural_Here}}AppService>();
+            _{{entity_Name_Here}}TestId = {{Primary_Key_Test_Value}};
+            SeedTestData();
+        }
+
+        private void SeedTestData()
+        {            
+            var currentTenant = GetCurrentTenant();
+            
+            var {{entity_Name_Here}} = new {{Entity_Name_Here}}
+            {
+                {{Seed_Default_Value}}
+                Id = _{{entity_Name_Here}}TestId,
+                TenantId = currentTenant.Id
+            };
+            
+            UsingDbContext(context =>
+            {
+                context.{{Entity_Name_Plural_Here}}.Add({{entity_Name_Here}});
+            });
+        }
+
+        [Fact]
+        public async Task Should_Get_All_{{Entity_Name_Plural_Here}}()
+        {
+            var {{entity_Name_Plural_Here}} = await _{{entity_Name_Plural_Here}}AppService.GetAll(new GetAll{{Entity_Name_Plural_Here}}Input());
+            
+            {{entity_Name_Plural_Here}}.TotalCount.ShouldBe(1);
+            {{entity_Name_Plural_Here}}.Items.Count.ShouldBe(1);
+
+            {{entity_Name_Plural_Here}}.Items.Any(x => x.{{Entity_Name_Here}}.Id == _{{entity_Name_Here}}TestId).ShouldBe(true);
+        }
+
+        [Fact]
+        public async Task Should_Get_{{Entity_Name_Here}}_For_View()
+        {
+            var {{entity_Name_Here}} = await _{{entity_Name_Plural_Here}}AppService.Get{{Entity_Name_Here}}ForView(_{{entity_Name_Here}}TestId);
+            
+            {{entity_Name_Here}}.ShouldNotBe(null);
+        }
+
+        [Fact]
+        public async Task Should_Get_{{Entity_Name_Here}}_For_Edit()
+        {
+            var {{entity_Name_Here}} = await _{{entity_Name_Plural_Here}}AppService.Get{{Entity_Name_Here}}ForEdit(new EntityDto{{Primary_Key_Inside_Tag_Here}} { Id = _{{entity_Name_Here}}TestId });
+            
+            {{entity_Name_Here}}.ShouldNotBe(null);
+        }
+
+        [Fact]
+        protected virtual async Task Should_Create_{{Entity_Name_Here}}()
+        {
+            var {{entity_Name_Here}} = new CreateOrEdit{{Entity_Name_Here}}Dto
+            {
+                {{Seed_Default_Value}}
+                Id = _{{entity_Name_Here}}TestId
+            };
+            
+            await _{{entity_Name_Plural_Here}}AppService.CreateOrEdit({{entity_Name_Here}});
+            
+            await UsingDbContextAsync(async context =>
+            {
+                var entity = await context.{{Entity_Name_Plural_Here}}.FirstOrDefaultAsync(e => e.Id == _{{entity_Name_Here}}TestId);
+                entity.ShouldNotBe(null);
+            });
+        }
+
+        [Fact]
+        protected virtual async Task Should_Update_{{Entity_Name_Here}}()
+        {
+            var {{entity_Name_Here}} = new CreateOrEdit{{Entity_Name_Here}}Dto
+            {
+                {{Seed_Updated_Value}}
+                Id = _{{entity_Name_Here}}TestId
+            };
+            
+            await _{{entity_Name_Plural_Here}}AppService.CreateOrEdit({{entity_Name_Here}});
+            
+            await UsingDbContextAsync(async context =>
+            {
+                var entity = await context.{{Entity_Name_Plural_Here}}.FirstOrDefaultAsync(e => e.Id == {{entity_Name_Here}}.Id);
+                entity.ShouldNotBeNull();
+                {{Test_Updated_Value}}            
+            });
+        }
+
+        [Fact]
+        public async Task Should_Delete_{{Entity_Name_Here}}()
+        {
+            await _{{entity_Name_Plural_Here}}AppService.Delete(new EntityDto{{Primary_Key_Inside_Tag_Here}} { Id = _{{entity_Name_Here}}TestId });
+            
+            await UsingDbContextAsync(async context =>
+            {
+                var entity = await context.{{Entity_Name_Plural_Here}}.FirstOrDefaultAsync(e => e.Id == _{{entity_Name_Here}}TestId);
+                entity.ShouldBeNull();
+            });
+        }
+    }
+}

@@ -1,0 +1,14 @@
+global:
+  wwwHostDomain: abpzerotemplate-host-www
+  wwwHostUrl: "https://abpzerotemplate-host-www"
+  wwwAngularDomain: abpzerotemplate-angular-www
+  wwwAngularUrl: "https://abpzerotemplate-angular-www"
+  nginxProxyBufferSize: "32k"
+  nginxProxyBuffersNumber: "8"
+  defaultConnString: "Server=anz-sql,1433;Database=MyTrainingV1231AngularDemoDb;User ID=sa;Password=123qweX."
+www-host:
+  containerImage: "abpzerotemplate-host"
+www-angular:
+  containerImage: "abpzerotemplate-angular"  
+dbmigrator:
+  containerImage: "abpzerotemplate-migrator"

@@ -1,0 +1,170 @@
+{
+"propertyTemplates":[
+		{
+			"placeholder" : "{{Seed_Default_Value}}",
+			"condition" : "{{Property_Listed_Here}} == true",
+			"templates" : [					
+                    {
+					"type" : "string",
+					"content" : "{{Property_Name_Here}} = \"Test value\","
+					},
+                    {
+					"type" : "DateTime",
+					"content" : "{{Property_Name_Here}} = DateTime.Now,"
+					},
+					{
+					"type" : "numeric",
+					"content" : "{{Property_Name_Here}} = 0,"
+					},
+					{
+					"type" : "enum",
+					"content" : "{{Property_Name_Here}} = 0,"
+					},
+                    {
+                    "type" : "Guid",
+                    "content" : "{{Property_Name_Here}} = Guid.Empty,"
+                    },
+					{
+					"type" : "bool",
+					"content" : "{{Property_Name_Here}} = false,"
+					},
+					{
+					"type" : "file",
+					"content" : "{{Property_Name_Here}} = null,"
+					},
+					{
+					"type" : "default",
+					"content" : "{{Property_Name_Here}} = null,"
+					}
+				]
+		},
+		{
+			"placeholder" : "{{Seed_Updated_Value}}",
+			"condition" : "{{Property_Listed_Here}} == true",
+			"templates" : [					
+                    {
+					"type" : "string",
+					"content" : "{{Property_Name_Here}} = \"Updated test value\","
+					},
+                    {
+					"type" : "DateTime",
+					"content" : "{{Property_Name_Here}} = Clock.Now.AddDays(3).Date,"
+					},
+					{
+					"type" : "numeric",
+					"content" : "{{Property_Name_Here}} = 1,"
+					},
+					{
+					"type" : "enum",
+					"content" : "{{Property_Name_Here}} = 0,"
+					},
+                    {
+                    "type" : "Guid",
+                    "content" : "{{Property_Name_Here}} = Guid.Empty,"
+                    },
+					{
+					"type" : "bool",
+					"content" : "{{Property_Name_Here}} = true,"
+					},
+					{
+					"type" : "file",
+					"content" : "{{Property_Name_Here}} = null,"
+					},
+					{
+					"type" : "default",
+					"content" : "{{Property_Name_Here}} = null,"
+					}
+				]
+		},
+		{
+			"placeholder" : "{{Test_Updated_Value}}",
+			"condition" : "{{Property_Listed_Here}} == true",
+			"templates" : [					
+                    {
+					"type" : "string",
+					"content" : "
+					entity.{{Property_Name_Here}}.ShouldBe(\"Updated test value\");"
+					},
+                    {
+					"type" : "DateTime",
+					"content" : "
+					entity.{{Property_Name_Here}}.ShouldBe(Clock.Now.AddDays(3).Date);"
+					},
+                    {
+                    "type" : "byte",
+                    "content" : "
+                    entity.{{Property_Name_Here}}.ShouldBeEquivalentTo((byte)1);"
+                    },                    {
+                    "type" : "short",
+                    "content" : "
+                    entity.{{Property_Name_Here}}.ShouldBeEquivalentTo((short)1);"
+                    },
+                    {
+                    "type" : "Guid",
+                    "content" : "
+                    entity.{{Property_Name_Here}}.ShouldBe(Guid.Empty);"
+                    },
+					{
+					"type" : "numeric",
+					"content" : "
+					entity.{{Property_Name_Here}}.ShouldBe(1);"
+					},
+					{
+					"type" : "enum",
+					"content" : "
+					entity.{{Property_Name_Here}}.ShouldBe(({{Property_Type_Here}}) 0);"
+					},
+					{
+					"type" : "bool",
+					"content" : "
+					entity.{{Property_Name_Here}}.ShouldBe(true);"
+					},
+					{
+					"type" : "file",
+					"content" : "
+					entity.{{Property_Name_Here}}.ShouldBeNull();"
+					},
+					{
+					"type" : "default",
+					"content" : "
+					entity.{{Property_Name_Here}}.ShouldBeNull();"
+					}
+				]
+		},
+	],
+"enumTemplates":[
+		{
+			"placeholder" : "{{Enum_Using_Looped_Template_Here}}",
+			"preventDuplicate":true,
+			"content" : "using {{Enum_Namespace_Here}};
+"
+		}
+	],
+"conditionalTemplates":[
+        {
+            "placeholder" : "{{Primary_Key_Test_Value}}",
+            "condition": "{{Primary_Key_Here}} == 'int'",
+            "content" : "1"
+        },
+        {
+            "placeholder" : "{{Primary_Key_Test_Value}}",
+            "condition": "{{Primary_Key_Here}} == 'guid'",
+            "content" : "Guid.NewGuid()"
+        },
+        {
+            "placeholder" : "{{Primary_Key_Test_Value}}",
+            "condition": "{{Primary_Key_Here}} == 'short'",
+            "content" : "1"
+        },
+        {
+            "placeholder" : "{{Primary_Key_Test_Value}}",
+            "condition": "{{Primary_Key_Here}} == 'string'",
+            "content" : "Guid.NewGuid().ToString()"
+        },
+		{
+			"placeholder": "{{Primary_Key_Inside_Tag_Here}}",
+			"condition": "{{Primary_Key_Here}} != 'int'",
+			"content": "<{{Primary_Key_Here}}>"
+		},
+	],
+}

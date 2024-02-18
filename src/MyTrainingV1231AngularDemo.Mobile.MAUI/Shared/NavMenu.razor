@@ -1,0 +1,87 @@
+﻿@inject IJSRuntime JS
+@inherits MyTrainingV1231AngularDemoComponentBase
+@using Abp.Collections.Extensions
+@using MyTrainingV1231AngularDemo.Models.NavigationMenu;
+
+@if (HasUserInfo)
+{
+    <div class="card">
+        <!--begin::Card body-->
+        <div class="card-body d-flex flex-center flex-column pt-12 p-9">
+            <!--begin::Avatar-->
+            <div class="symbol symbol-65px symbol-circle mb-5">
+                <img src="@_userImage">
+            </div>
+            <!--end::Avatar-->
+            <!--begin::Name-->
+            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">
+                @ApplicationContext.LoginInfo.User.UserName
+            </a>
+            <!--end::Name-->
+            <!--begin::Position-->
+            <div class="fw-semibold text-gray-400 mb-6"> @(ApplicationContext.LoginInfo.User.Name + " " + ApplicationContext.LoginInfo.User.Surname)</div>
+            <!--end::Position-->
+        </div>
+        <!--end::Card body-->
+    </div>
+}
+
+<!--begin:Menu item-->
+<div class="menu-item pt-2">
+    <!--begin:Menu content-->
+    <div class="menu-content">
+        <span class="menu-heading fw-bold text-uppercase fs-7">@L("Menu")</span>
+    </div>
+    <!--end:Menu content-->
+</div>
+<!--end:Menu item-->
+@foreach (var item in MenuItems)
+{
+    <div class="menu-item @(item.Items.Any() ? "menu-accordion": "")" @attributes="GetMenuAttributes(item)">
+        <!--begin:Menu link-->
+        @if (item.Items.IsNullOrEmpty())
+        {
+            <NavLink class="menu-link" href="@item.NavigationUrl">
+                <span class="menu-icon"> <i class="@item.Icon"></i> </span>
+                <span class="menu-title">@item.Title</span>
+            </NavLink>
+        }
+        else
+        {
+            <span class="menu-link">
+                <span class="menu-icon"> <i class="@item.Icon"></i> </span>
+                <span class="menu-title">@item.Title</span>
+                <span class="menu-arrow"></span>
+            </span>
+        }
+        <!--end:Menu link-->
+        @if (item.Items.Any())
+        {
+            <div class="menu-sub menu-sub-accordion">
+                @foreach (var subItem in item.Items)
+                {
+                    <div class="menu-item">
+                        <NavLink class="menu-link" href="@subItem.NavigationUrl">
+                            <span class="menu-icon"> <i class="@subItem.Icon"></i> </span>
+                            <span class="menu-title">@subItem.Title</span>
+                        </NavLink>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private Dictionary<string, object> GetMenuAttributes(NavigationMenuItem item)
+    {
+        if (item.Items.Any())
+        {
+            return new() {
+                { "data-kt-menu-trigger", "click" }
+            };
+        }
+
+        return new() { };
+    }
+}

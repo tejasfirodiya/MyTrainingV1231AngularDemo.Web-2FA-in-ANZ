@@ -1,0 +1,93 @@
+﻿@inherits ModalBase
+
+<div class="modal fade" id="@ModalId" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded">
+            <div class="modal-body scroll-y pt-15 pb-15">
+                @if (TenantToEdit != null && _isInitialized)
+                {
+                    <div class="mb-13 text-center">
+                        <h1 class="mb-3">@L("EditTenant")</h1>
+                    </div>
+                    <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                            <span class="required">
+                                @L("TenancyName")
+                            </span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7"></i>
+                        </label>
+                        <input type="text" class="form-control form-control-solid" @bind="TenantToEdit.TenancyName" placeholder="@L("TenancyName")" />
+                    </div>
+                    <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                            <span class="required">@L("Name")</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7"></i>
+                        </label>
+                        <input type="text" class="form-control form-control-solid" @bind="TenantToEdit.Name" placeholder="@L("Name")" />
+                    </div>
+                    <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container mb-8">
+                        <label class="form-check form-switch form-check-custom form-check-solid">
+                            <input type="checkbox" class="form-check-input" @bind="TenantToEdit.IsActive"></input>
+                            <span class="form-check-label fw-semibold text-muted">@L("Active")</span>
+                        </label>
+                    </div>
+                    <hr />
+                    <div class="col-md-6 fv-row fv-plugins-icon-container mb-8" data-select2-id="select2-data-119-f5bj">
+                        <label class="required fs-6 fw-semibold">@L("Edition")</label>
+                        <select class="form-select form-select-solid" data-control="select2"
+                                data-hide-search="true" tabindex="-1" aria-hidden="true" data-kt-initialized="1" @onchange="OnSelectedEditionChanged">
+                            @foreach (var edition in Editions)
+                            {
+                                if (SelectedEdition != null && SelectedEdition.Value == edition.Value)
+                                {
+
+                                    <option value="@edition.Value" selected="selected">@edition.DisplayText</option>
+                                }
+                                else
+                                {
+                                    <option>@edition.DisplayText</option>
+                                }
+                            }
+                        </select>
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div>
+
+                    @if (IsSubscriptionFieldVisible)
+                    {
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-8">
+                            <input type="checkbox" class="form-check-input" @bind="IsUnlimitedTimeSubscription"></input>
+                            <span class="form-check-label fw-semibold text-muted">@L("UnlimitedTimeSubscription")</span>
+                        </label>
+                        @if (!IsUnlimitedTimeSubscription)
+                        {
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container mb-8">
+                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                    <span class="required">@L("SubscriptionEndDateUtc")</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7"></i>
+                                </label>
+                                <input type="date" class="form-control form-control-solid datetimepicker-input" @bind="TenantToEdit.SubscriptionEndDateUtc"
+                                       id="subscription-end-date-utc" data-toggle="datetimepicker" data-target="#subscription-end-date-utc">
+                            </div>
+                        }
+
+                        @if (!IsSelectedEditionFree)
+                        {
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-8">
+                                <input type="checkbox" class="form-check-input" @bind="TenantToEdit.IsInTrialPeriod"></input>
+                                <span class="form-check-label fw-semibold text-muted">@L("IsInTrialPeriod")</span>
+                            </label>
+                        }
+                    }
+
+                    <div class="text-center">
+                        <button type="reset" data-dismiss="modal" class="btn btn-light me-3" @onclick="Hide">@L("Cancel")</button>
+                        <button type="button" class="btn btn-primary" @onclick="UpdateTenantAsync">
+                            <span class="indicator-label">@L("Save")</span>
+                        </button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

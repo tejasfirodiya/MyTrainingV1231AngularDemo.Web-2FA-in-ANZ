@@ -1,0 +1,23 @@
+﻿@inherits ModalBase
+
+<div class="modal fade" id="@ModalId" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded">       
+            <div class="modal-body scroll-y pt-15 pb-15">
+                <div class="mb-13 text-center">
+                    <h1 class="mb-3">@L("ChangeTenant")</h1>
+                    <div class="text-muted fw-semibold fs-5">@L("LeaveEmptyToSwitchToHost")</div>
+                </div>
+                <div class="d-flex flex-column mb-8 fv-row">
+                    <input type="text" class="form-control form-control-solid" placeholder="@L("TenancyName")" @bind-value="TenancyName" />
+                </div>
+                <div class="text-center">
+                    <button type="reset" data-dismiss="modal" class="btn btn-light me-3" @onclick="Cancel">@L("Cancel")</button>
+                    <button type="button" class="btn btn-primary" @onclick="Save">
+                        <span class="indicator-label">@L("Ok")</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

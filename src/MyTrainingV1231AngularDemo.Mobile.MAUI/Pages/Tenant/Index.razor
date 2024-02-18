@@ -1,0 +1,58 @@
+﻿@using MyTrainingV1231AngularDemo.Services.Navigation
+@inherits MyTrainingV1231AngularDemoMainLayoutPageComponentBase
+@attribute [Route("/" + NavigationUrlConsts.Tenants)]
+
+<div class="row align-items-center mt-1 mb-2 m-0">
+    <div class="col-xl-12">
+        <div class="mb-5 align-items-center">
+            <div class="input-group">
+                <input type="text" id="UsersTableFilter" class="form-control" @bind="_filter.Filter" placeholder="@L("SearchWithThreeDot")">
+                <button @onclick="RefreshList" class="btn btn-primary" type="button">
+                    <i class="fa fa-search" aria-label="Search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-0">
+    <div class="col">
+        <Virtualize @ref="TenantListContainer" Context="tenant" ItemsProvider="@LoadTenants" ItemSize="125">
+            <div class="card mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="row">
+                                <label class="col-4 fw-semibold text-muted">@L("TenancyName")</label>
+                                <div class="col-8">
+                                    @tenant.TenancyName
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-4 fw-semibold text-muted">@L("Name")</label>
+                                <div class="col-8">
+                                    @tenant.Name
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-4 fw-semibold text-muted">@L("Edition")</label>
+                                <div class="col-8">
+                                    @tenant.EditionDisplayName
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-sm btn-icon btn-primary w-25px h-25px me-1" @onclick="(()=>EditTenant(tenant))">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-icon btn-danger w-25px h-25px" @onclick="(()=>DeleteTenant(tenant))">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Virtualize>
+    </div>
+</div>
+<EditTenantModal OnSaveCompleted="RefreshList" @ref="editTenantModal"></EditTenantModal>
+<CreateTenantModal OnSaveCompleted="RefreshList" @ref="createTenantModal"></CreateTenantModal>

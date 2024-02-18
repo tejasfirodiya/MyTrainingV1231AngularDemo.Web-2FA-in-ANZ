@@ -1,0 +1,101 @@
+﻿import { Login } from '../utils/login';
+import { test, expect, Page } from '@playwright/test';
+import { {{Entity_Name_Plural_Here}}Page } from './{{entity_Name_Here}}.page';
+
+test.describe('{{ENTITY_NAME_PLURAL_HERE}}', () => {
+    let {{entity_Name_Plural_Here}}Page: {{Entity_Name_Plural_Here}}Page;
+    let page: Page;
+
+    test.beforeAll(async ({ browser }) => {
+        page = await browser.newPage();
+        {{entity_Name_Plural_Here}}Page = new {{Entity_Name_Plural_Here}}Page(page);
+
+        await page.setViewportSize({
+            width: 1920,
+            height: 1080
+        });
+
+        const login = new Login(page);
+        await login.login();
+    });
+
+    test.afterAll(async () => {
+        await page.close();
+    });
+
+    test.afterEach(async () => {
+        await page.waitForTimeout(1000);
+    });
+
+    test.describe('CRUD', () => {
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_LIST = '{{Entity_Name_Plural_Here}}.crud.010-list.png';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_VALIDATION_SHOW = '{{Entity_Name_Plural_Here}}.crud.030-validation-show.png';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_VALIDATION_HIDE = '{{Entity_Name_Plural_Here}}.crud.040-validation-hide.png';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_NEW_SAVE = '{{Entity_Name_Plural_Here}}.crud.050-new-save.png';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_ACTIONS = '{{Entity_Name_Plural_Here}}.crud.070-actions.png';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_EDIT_SAVE = '{{Entity_Name_Plural_Here}}.crud.090-edit-save.png';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_DELETE_WARNING = '{{Entity_Name_Plural_Here}}.crud.100-delete-warning.png';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_DELETE_CANCEL = '{{Entity_Name_Plural_Here}}.crud.110-delete-cancel.png';
+        const {{ENTITY_NAME_PLURAL_HERE}}_CRUD_DELETE_CONFIRM = '{{Entity_Name_Plural_Here}}.crud.120-delete-confirm.png';
+        {{Consts_Here}}
+
+        /* Step 1 */
+        test('should render the initial list', async () => {
+            await {{entity_Name_Plural_Here}}Page.gotoPage();
+            await {{entity_Name_Plural_Here}}Page.waitForTableContent();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_LIST);
+        });
+
+       {{Steps_Here}}
+
+        /* Step 9 */
+        test('should save changes to record when "Save" button is clicked', async () => {
+            await {{entity_Name_Plural_Here}}Page.fillInputs({ {{Seed_Updated_Value}}});
+            await {{entity_Name_Plural_Here}}Page.saveForm();
+            await {{entity_Name_Plural_Here}}Page.waitForResponse();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_EDIT_SAVE);
+        });
+
+        /* Step 10 */
+        test('should display warning on click to "Delete" button', async () => {
+            await {{entity_Name_Plural_Here}}Page.openActionsDropdown(1);
+            await {{entity_Name_Plural_Here}}Page.waitForDropdownMenu();
+            await {{entity_Name_Plural_Here}}Page.triggerDropdownAction('Delete');
+            await {{entity_Name_Plural_Here}}Page.waitForConfirmationDialog();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_DELETE_WARNING);
+        });
+
+        /* Step 11 */
+        test('should not delete record on click to "Cancel" button', async () => {
+            await {{entity_Name_Plural_Here}}Page.cancelConfirmation();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_DELETE_CANCEL);
+        });
+
+        /* Step 12 */
+        test('should delete record on click to "Yes" button', async () => {
+            await {{entity_Name_Plural_Here}}Page.openActionsDropdown(1);
+            await {{entity_Name_Plural_Here}}Page.waitForDropdownMenu();
+            await {{entity_Name_Plural_Here}}Page.triggerDropdownAction('Delete');
+            await {{entity_Name_Plural_Here}}Page.waitForConfirmationDialog();
+            await {{entity_Name_Plural_Here}}Page.confirmConfirmation();
+            await {{entity_Name_Plural_Here}}Page.waitForResponse();
+
+            await expect(page).toHaveScreenshot({{ENTITY_NAME_PLURAL_HERE}}_CRUD_DELETE_CONFIRM);
+        });
+
+        async function triggerValidation() {
+            await fillInputsWithValidValues();
+            await {{entity_Name_Plural_Here}}Page.clearInputs({{List_Validation_Properties}});
+        }
+
+        async function fillInputsWithValidValues() {
+            await {{entity_Name_Plural_Here}}Page.fillInputs({
+                {{Seed_Updated_Value}}
+            });
+        }
+    });
+});

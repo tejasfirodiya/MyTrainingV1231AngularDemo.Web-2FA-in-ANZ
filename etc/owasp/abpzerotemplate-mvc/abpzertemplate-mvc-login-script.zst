@@ -1,0 +1,129 @@
+{
+  "about": "This is a Zest script. For more details about Zest visit https://github.com/zaproxy/zest/",
+  "zestVersion": "0.3",
+  "title": "abpzertemplate-mvc-logi-script.zst",
+  "description": "",
+  "prefix": "",
+  "type": "StandAlone",
+  "parameters": {
+    "tokenStart": "{{",
+    "tokenEnd": "}}",
+    "tokens": {},
+    "elementType": "ZestVariables"
+  },
+  "statements": [
+    {
+      "url": "https://abpzerotemplate-www/Account/Login",
+      "data": "",
+      "method": "GET",
+      "headers": "Upgrade-Insecure-Requests: 1\r\nSec-Fetch-Dest: document\r\nSec-Fetch-Mode: navigate\r\nSec-Fetch-Site: none\r\nSec-Fetch-User: ?1\r\n",
+      "response": {
+        "url": "https://abpzerotemplate-www/Account/Login",
+        "headers": "",
+        "body": "",
+        "statusCode": 200,
+        "responseTimeInMs": 220,
+        "elementType": "ZestResponse"
+      },
+      "assertions": [
+        {
+          "rootExpression": {
+            "code": 200,
+            "not": false,
+            "elementType": "ZestExpressionStatusCode"
+          },
+          "elementType": "ZestAssertion"
+        }
+      ],
+      "followRedirects": false,
+      "timestamp": 1632146063171,
+      "cookies": [],
+      "index": 1,
+      "enabled": true,
+      "elementType": "ZestRequest"
+    },
+    {
+      "fieldDefinition": {
+        "formIndex": 0,
+        "fieldName": "__RequestVerificationToken",
+        "elementType": "ZestFieldDefinition"
+      },
+      "variableName": "csrf1",
+      "index": 2,
+      "enabled": true,
+      "elementType": "ZestAssignFieldValue"
+    },
+    {
+      "url": "https://abpzerotemplate-www/Account/Login",
+      "data": "returnUrl\u003d%2FApp\u0026returnUrlHash\u003d\u0026ss\u003d\u0026usernameOrEmailAddress\u003dadmin\u0026password\u003d123qwe\u0026__RequestVerificationToken\u003d{{csrf1}}",
+      "method": "POST",
+      "headers": "Content-Type: application/x-www-form-urlencoded; charset\u003dUTF-8\r\nX-Requested-With: XMLHttpRequest\r\nExpires: Sat, 01 Jan 2000 00:00:00 GMT\r\nX-XSRF-TOKEN:{{csrf1}}\r\nContent-Length: 271\r\nOrigin: https://abpzerotemplate-www\r\nSec-Fetch-Dest: empty\r\nSec-Fetch-Mode: cors\r\nSec-Fetch-Site: same-origin\r",
+      "response": {
+        "url": "https://abpzerotemplate-www/Account/Login",
+        "headers": "",
+        "body": "{\"result\":null,\"targetUrl\":\"/App\",\"success\":true,\"error\":null,\"unAuthorizedRequest\":false,\"__abp\":true}",
+        "statusCode": 200,
+        "responseTimeInMs": 1968,
+        "elementType": "ZestResponse"
+      },
+      "assertions": [
+        {
+          "rootExpression": {
+            "code": 200,
+            "not": false,
+            "elementType": "ZestExpressionStatusCode"
+          },
+          "elementType": "ZestAssertion"
+        }
+      ],
+      "followRedirects": true,
+      "timestamp": 1632146071277,
+      "cookies": [
+        {
+          "domain": "localhost",
+          "name": "XSRF-TOKEN",
+          "value": "{{csrf1}}",
+          "path": "/",
+          "secure": false
+        }
+      ],
+      "index": 3,
+      "enabled": true,
+      "elementType": "ZestRequest"
+    },
+    {
+      "url": "https://abpzerotemplate-www/App/Tenants",
+      "data": "",
+      "method": "GET",
+      "headers": "Upgrade-Insecure-Requests: 1\r\nSec-Fetch-Dest: document\r\nSec-Fetch-Mode: navigate\r\nSec-Fetch-Site: same-origin\r\nSec-Fetch-User: ?1\r\n",
+      "response": {
+        "url": "https://abpzerotemplate-www/App/HostDashboard",
+        "headers": "",
+        "body": "",
+        "statusCode": 200,
+        "responseTimeInMs": 2753,
+        "elementType": "ZestResponse"
+      },
+      "assertions": [
+        {
+          "rootExpression": {
+            "code": 200,
+            "not": false,
+            "elementType": "ZestExpressionStatusCode"
+          },
+          "elementType": "ZestAssertion"
+        }
+      ],
+      "followRedirects": true,
+      "timestamp": 1632146077151,
+      "cookies": [],
+      "index": 4,
+      "enabled": true,
+      "elementType": "ZestRequest"
+    }
+  ],
+  "authentication": [],
+  "index": 0,
+  "enabled": true,
+  "elementType": "ZestScript"
+}

@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+      
+  mycompanyname.abpzerotemplate.web.host:
+    image: mycompanyname.abpzerotemplate.web.host
+    container_name: mycompanyname.abpzerotemplate.web.host_container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ConnectionStrings__Default=Server=192.168.1.37,1433;Database=MyTrainingV1231AngularDemoDb;User=sa;Password=123qwe;TrustServerCertificate=True;
+    ports:
+      - "44301:443"

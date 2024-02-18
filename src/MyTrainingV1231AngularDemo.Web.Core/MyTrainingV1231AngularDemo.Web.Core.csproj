@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <Import Project="..\..\common.props"></Import>
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>MyTrainingV1231AngularDemo.Web.Core</AssemblyName>
+    <PackageId>MyTrainingV1231AngularDemo.Web.Core</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
+    <RootNamespace>MyTrainingV1231AngularDemo.Web</RootNamespace>
+    <OutputType>Library</OutputType>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyTrainingV1231AngularDemo.GraphQL\MyTrainingV1231AngularDemo.GraphQL.csproj" />
+    <ProjectReference Include="..\MyTrainingV1231AngularDemo.Application\MyTrainingV1231AngularDemo.Application.csproj" />
+    <ProjectReference Include="..\MyTrainingV1231AngularDemo.EntityFrameworkCore\MyTrainingV1231AngularDemo.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="8.3.1" />
+    <PackageReference Include="Abp.AspNetZeroCore.Web" Version="4.1.0" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.8.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.5.0" />
+    <PackageReference Include="Owl.reCAPTCHA" Version="7.0.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.AspNetCore" Version="8.3.1" />
+    <PackageReference Include="Abp.HangFire.AspNetCore" Version="8.3.1" />
+    <PackageReference Include="Abp.RedisCache" Version="8.3.1" />
+    <PackageReference Include="Abp.HtmlSanitizer" Version="8.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="7.0.0" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="7.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="7.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.2" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="7.0.0" />
+    <PackageReference Include="OpenIddict.AspNetCore" Version="4.7.0" />
+  </ItemGroup>
+</Project>

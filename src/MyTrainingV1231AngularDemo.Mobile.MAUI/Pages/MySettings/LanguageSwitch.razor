@@ -1,0 +1,16 @@
+﻿@inherits MyTrainingV1231AngularDemoComponentBase
+
+<div class="fv-row fv-plugins-icon-container mb-5" data-select2-id="select2-data-119-f5bj">
+    <label class="fs-6 fw-semibold mb-2">@L("Language")</label>
+    <div>
+        <select @bind="SelectedLanguage" class="form-select form-select-solid" data-control="select2"
+                data-hide-search="true" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
+            @foreach (var item in Languages)
+            {
+                <option value="@item.Name">
+                    @item.DisplayName
+                </option>
+            }
+        </select>
+    </div>
+</div>

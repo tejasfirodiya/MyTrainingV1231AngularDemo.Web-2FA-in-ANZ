@@ -1,0 +1,6 @@
+apiVersion: v2
+name: www-host
+appVersion: "1.0"
+description: MyTrainingV1231AngularDemo Host WWW Application
+version: 1.0.0
+type: application

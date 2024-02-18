@@ -1,0 +1,36 @@
+﻿<div class="app-toolbar py-3 py-lg-6" id="kt_app_toolbar">
+    <div id="kt_app_toolbar_container" class="container-fluid app-container d-flex flex-stack" style="padding: 0 14px!important;">
+
+        <!--begin::Info-->
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <!--begin::Page Title-->
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                @PageHeaderService.Title
+            </h1>
+            <!--end::Page Title-->
+            <span class="text-muted me-4">Manage your tenants.</span>
+
+        </div>
+        <!--end::Info-->
+
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center">
+
+            @if (PageHeaderService.HeaderButtonInfos != null)
+            {
+                @foreach (var button in PageHeaderService.HeaderButtonInfos)
+                {
+                    <button @onclick="button.OnClick" class="btn btn-primary me-1">
+                        <i class="fa fa-plus btn-md-icon"></i>
+                        <span class="d-none d-md-inline-block">
+                            @button.Text
+                        </span>
+                    </button>
+                }
+            }
+
+        </div>
+        <!--end::Toolbar-->
+
+    </div>
+</div>

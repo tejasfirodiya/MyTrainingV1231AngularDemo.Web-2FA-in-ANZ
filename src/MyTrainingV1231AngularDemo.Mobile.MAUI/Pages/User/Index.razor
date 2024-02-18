@@ -1,0 +1,44 @@
+﻿@using MyTrainingV1231AngularDemo.Services.Navigation
+@inherits MyTrainingV1231AngularDemoMainLayoutPageComponentBase
+@attribute [Route("/" + NavigationUrlConsts.User)]
+
+<div class="row">
+    <div class="row align-items-center mt-1 mb-3 m-0">
+        <div class="col-xl-12">
+            <div class="mb-5 align-items-center">
+                <div class="input-group">
+                    <input type="text" id="UsersTableFilter" class="form-control" @bind="_filter.Filter" placeholder="@L("SearchWithThreeDot")">
+                    <button @onclick="RefreshList" class="btn btn-primary" type="button">
+                        <i class="fa fa-search" aria-label="Search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <Virtualize @ref="UserListContainer" Context="user" ItemsProvider="@LoadUsers" ItemSize="92">
+        <div class="row m-0 mb-2">
+            <a href="javascript:;" @onclick="(()=>EditUser(user))">
+                <div class="card shadow-xs">
+                    <div class="card-body py-5">
+                        <div class="d-flex align-items-center me-5 me-xl-13">
+                            <!--begin::Symbol-->
+                            <div class="symbol symbol-50px symbol-circle me-3">
+                                <img src="@user.Photo" class="" alt="">
+                            </div>
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
+                            <div class="m-0">
+                                <span class="fw-bold text-gray-800 text-hover-primary fs-3">@user.UserName</span>
+                                <span class="fw-semibold text-gray-400 d-block fs-6">@user.FullName</span>
+                                <span class="fw-semibold text-gray-400 d-block fs-7">@user.EmailAddress</span>
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </Virtualize>
+</div>
+
+<CreateOrEditUserModal OnSave="RefreshList" @ref="createOrEditUserModal"></CreateOrEditUserModal>

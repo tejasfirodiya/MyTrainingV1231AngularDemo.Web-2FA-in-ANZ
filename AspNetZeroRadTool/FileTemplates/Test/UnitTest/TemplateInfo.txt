@@ -1,0 +1,3 @@
+{
+	"path" : "{{Namespace_Here}}.Tests\\{{Namespace_Relative_Full_Reverse_Slash_Here}}\\{{Entity_Name_Here}}AppService_Tests.cs"
+}

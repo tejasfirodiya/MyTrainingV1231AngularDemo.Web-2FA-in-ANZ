@@ -1,0 +1,32 @@
+.jumbotron {
+    max-width: 400px;
+    margin: 100px auto;
+    font-family: sans-serif;
+    background: #f5f5f5;
+    padding: 10px 30px 15px;
+    border-radius: 4px;
+    border-bottom: 2px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+.jumbotron input.btn {
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.jumbotron input.btn.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.jumbotron input.btn.btn-danger {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+}

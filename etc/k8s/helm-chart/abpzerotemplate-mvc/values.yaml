@@ -1,0 +1,10 @@
+global:
+  wwwDomain: abpzerotemplate-www
+  wwwUrl: "https://abpzerotemplate-www"
+  nginxProxyBufferSize: "32k"
+  nginxProxyBuffersNumber: "8"
+  defaultConnString: "Server=anz-sql,1433;Database=MyTrainingV1231AngularDemoDb;User ID=sa;Password=123qweX."
+www:
+  containerImage: "abpzerotemplate-mvc"
+dbmigrator:
+  containerImage: "abpzerotemplate-migrator"

@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+
+<!--begin::Root-->
+<div class="d-flex flex-column flex-root vh-100" id="kt_app_root">
+    <!--begin::Authentication - Sign-in -->
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+        <!--begin::Aside-->
+        <div class="d-flex flex-column flex-column-fluid flex-center w-lg-50 p-10 pt-0">
+
+            <!--begin::Logo-->
+            <a href="javascript:;" class="d-block mx-auto py-15">
+                <img alt="Logo" src="@_logoURL" class="theme-light-show h-55px" />
+            </a>
+            <!--end::Logo-->
+            @Body
+        </div>
+        <!--end::Aside-->
+    </div>
+    <!--end::Authentication - Sign-in-->
+</div>
+<!--end::Root-->

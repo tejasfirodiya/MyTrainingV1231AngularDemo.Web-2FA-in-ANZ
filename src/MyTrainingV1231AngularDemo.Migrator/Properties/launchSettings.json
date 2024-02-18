@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "MyTrainingV1231AngularDemo.Migrator": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "environmentVariables": {
+        "ASPNETCORE_Docker_Enabled": "true",
+        "ConnectionStrings__Default": "Server=mssqlDb;Database=MyTrainingV1231AngularDemoDb;User=sa;Password=Super_Encrypted_Passw0rd!"
+      }
+    }
+  }
+}

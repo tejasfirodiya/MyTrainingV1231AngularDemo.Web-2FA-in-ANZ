@@ -1,0 +1,24 @@
+@using Microsoft.Extensions.Primitives
+<head>
+    <title>MyTrainingV1231AngularDemo</title>
+    <link href="~/view-resources/Views/Authorize/Authorize.css" rel="stylesheet" asp-append-version="true"/>
+</head>
+<body>
+    <div class="jumbotron">
+        <h3 class="fw-bolder text-dark fs-4 fs-1-lg">@L("Authorization")</h3>
+        <p class="lead text-left">@string.Format(L("DoYouWantToGrantAccessToYourData"), Model.ApplicationName)</p>
+        <p class="fw-light">@L("ScopesRequested"): @Model.Scope</p>
+    
+        <form method="post" action="~/connect/authorize/callback" >
+            @Html.AntiForgeryToken()
+            @* Flow the request parameters so they can be received by the Accept/Reject actions: *@
+            @foreach (var parameter in Context.Request.HasFormContentType ? (IEnumerable<KeyValuePair<string, StringValues>>) Context.Request.Form : Context.Request.Query)
+            {
+                <input type="hidden" name="@parameter.Key" value="@parameter.Value"/>
+            }
+    
+            <input class="btn btn-primary" name="accept" type="submit" value="@L("Accept")"/>
+            <input class="btn btn-danger ms-1" name="deny" type="submit" value="@L("Deny")"/>
+        </form>
+    </div>
+</body>

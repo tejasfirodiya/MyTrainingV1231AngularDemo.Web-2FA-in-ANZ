@@ -1,0 +1,8 @@
+﻿import { BaseAngularPage } from "../../shared/base-page";
+
+export class {{Entity_Name_Plural_Here}}Page extends BaseAngularPage {
+
+    async gotoPage() {
+        await this.gotoUrl('/app/{{Menu_Position_Here}}/{{namespace_Relative_Full_Here}}/{{entity_Name_Plural_Here}}');
+    }
+}

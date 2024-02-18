@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MyTrainingV1231AngularDemo.Mobile.MAUI</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableDefaultCssItems>false</EnableDefaultCssItems>
+    <AssemblyName>MyTrainingV1231AngularDemo.Mobile.MAUI</AssemblyName>
+    <!-- Display name -->
+    <ApplicationTitle>MyTrainingV1231AngularDemo.Mobile.MAUI</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.companyname.mycompanyname.abpzerotemplate.mobile.maui</ApplicationId>
+    <ApplicationIdGuid>5664ADE0-0A6B-4CFF-A3FD-975486AE90CA</ApplicationIdGuid>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- App Icon -->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#FFFFFF" />
+    <!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FFFFFF" BaseSize="128,128" />
+    <!-- Images -->
+    <MauiImage Include="Resources\Images\*" />
+    <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+    <!-- Custom Fonts -->
+    <MauiFont Include="Resources\Fonts\*" />
+    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp" Version="8.3.1" />
+    <PackageReference Include="Abp.AutoMapper" Version="8.3.1" />
+    <PackageReference Include="Abp.Web.Common" Version="8.3.1" />
+    <PackageReference Include="Abp.Zero.Common" Version="8.3.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="4.0.0.190-beta" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="4.1.0-beta" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyTrainingV1231AngularDemo.Application.Client\MyTrainingV1231AngularDemo.Application.Client.csproj" />
+    <ProjectReference Include="..\MyTrainingV1231AngularDemo.Application.Shared\MyTrainingV1231AngularDemo.Application.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\media\misc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Localization\AppResources.tr.Designer.cs">
+      <DependentUpon>AppResources.tr.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Localization\AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Localization\AppResources.tr.resx">
+      <LastGenOutput>AppResources.tr.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

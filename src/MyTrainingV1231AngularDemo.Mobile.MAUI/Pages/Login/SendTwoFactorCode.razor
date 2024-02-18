@@ -1,0 +1,41 @@
+﻿@using MyTrainingV1231AngularDemo.Mobile.MAUI.Pages.MySettings
+@using MyTrainingV1231AngularDemo.Services.Navigation
+@layout LoginLayout
+@inherits MyTrainingV1231AngularDemoComponentBase
+@attribute [Route("/" + NavigationUrlConsts.SendTwoFactorCode)]
+
+<div class="d-flex justify-content-between flex-column-fluid flex-column w-100 mw-450px">
+    <div class="py-20">
+        <div class="card-body">
+            <div class="text-start mb-10">
+                <h1 class="text-dark mb-3 fs-3x" data-kt-translate="sign-in-title">@L("SendSecurityCode")</h1>
+                <div class="text-gray-400 fw-semibold fs-6" data-kt-translate="general-desc">
+                    @L("CurrentTenant"):
+                    <span class="text-dark">
+                        @CurrentTenancyNameOrDefault
+                    </span>
+                </div>
+            </div>
+            <p>@L("SendSecurityCode_Information")</p>
+            <select @bind="_selectedProvider" class="form-select form-select-solid" data-control="select2"
+                    data-hide-search="true" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
+                @foreach (var item in _twoFactorAuthProviders)
+                {
+                    <option value="@item">
+                        @item
+                    </option>
+                }
+            </select>
+            <div class="d-flex flex-stack mt-5">
+                <button id="kt_sign_in_submit" class="btn btn-primary me-2 flex-shrink-0" @onclick="SelectProvider">
+                    <span class="indicator-label" data-kt-translate="sign-in-submit">@L("Submit")</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="m-0">
+        <div class="col-5">
+            <LanguageSwitch OnSave="OnLanguageSwitchAsync"></LanguageSwitch>
+        </div>
+    </div>
+</div>
